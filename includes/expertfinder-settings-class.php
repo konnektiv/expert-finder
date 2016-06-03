@@ -268,30 +268,48 @@ class Expert_Finder_Settings {
 		print 'Configure the different variables of the Expert Search engine here.';
 	}
 
-	public function checkbox_callback($option, $text)
-	{
-		?>
-		<input id="expertfinder-options-<?php echo $option ?>" name="expertfinder_options[<?php echo $option ?>]"
-			   type="checkbox" value="1" <?php checked(true, $this->options[$option]) ?>>
-		<label for="expertfinder-options-<?php echo $option ?>"><?php echo $text ?></label>
-		<?php
-	}
-
-	public function text_callback($option, $text, $type="text", $width = "70%", $attrs = '')
-	{
+	private function parse_option($option) {
 		$tokens = explode('.', $option);
 		$id = implode('-', $tokens);
 		$name = implode('][', $tokens);
 		$value = $this->options;
 		foreach($tokens as $key){
-			$value = $value[$key];
+			if (isset($value[$key])) {
+				$value = $value[$key];
+			} else {
+				$value = false;
+				break;
+			}
 		}
 
+		return array(
+			'id'    => $id,
+			'name'  => $name,
+			'value' => $value,
+			);
+	}
+
+	public function checkbox_callback($option, $text)
+	{
+		$option = $this->parse_option($option);
+
 		?>
-		<label for="expertfinder-options-<?php echo $id ?>"><?php echo $text ?></label><br>
-		<input style="width:<?php echo $width ?>;" id="expertfinder-options-<?php echo $id ?>"
-			   name="expertfinder_options[<?php echo $name ?>]"
-			   type="<?php echo $type ?>" value="<?php echo $value ?>" <?php echo $attrs ?>>
+		<input id="expertfinder-options-<?php echo $option['id'] ?>" name="expertfinder_options[<?php echo $option['name'] ?>]"
+			   type="checkbox" value="1" <?php checked($option['value']) ?>>
+		<label for="expertfinder-options-<?php echo $option['id'] ?>"><?php echo $text ?></label>
+		<?php
+	}
+
+	public function text_callback($option, $text, $type="text", $width = "70%", $attrs = '')
+	{
+
+		$option = $this->parse_option($option);
+
+		?>
+		<label for="expertfinder-options-<?php echo $option['id'] ?>"><?php echo $text ?></label><br>
+		<input style="width:<?php echo $width ?>;" id="expertfinder-options-<?php echo $option['id'] ?>"
+			   name="expertfinder_options[<?php echo $option['name'] ?>]"
+			   type="<?php echo $type ?>" value="<?php echo $option['value'] ?>" <?php echo $attrs ?>>
 		<?php
 	}
 
@@ -325,6 +343,7 @@ class Expert_Finder_Settings {
 		$finder = Expert_Finder_Result_Type_Factory::getFinder('activity_stream');
 		if ($finder->isAvailable()) {
 			echo "<h3>Activity Stream updates</h3>";
+			$this->checkbox_callback("result_types.activity_stream.enabled", 'Check to enable searching for activity stream updates.' );
 			echo "<p>";
 			$this->text_callback('result_types.activity_stream.A', 'Enter base points A when the search term occures in an activty stream update.', 'number', '30%');
 			echo "</p>";
@@ -333,6 +352,7 @@ class Expert_Finder_Settings {
 		$finder = Expert_Finder_Result_Type_Factory::getFinder('profile_field');
 		if ($finder->isAvailable()) {
 			echo "<h3>Profile fields</h3>";
+			$this->checkbox_callback("result_types.profile_field.enabled", 'Check to enable searching for profile fields.' );
 			echo "<p>";
 			$this->text_callback('result_types.profile_field.A', 'Enter base points A when the search term occures in a profile field.', 'number', '30%');
 			echo "</p>";
@@ -345,6 +365,7 @@ class Expert_Finder_Settings {
 			$object = get_post_type_object($post_type);
 
 			echo "<h3>{$object->labels->name}</h3>";
+			$this->checkbox_callback("result_types.post.post_types.{$post_type}.enabled", sprintf('Check to enable searching for %s', $object->labels->name) );
 			echo "<p>";
 			$this->text_callback("result_types.post.post_types.{$post_type}.A_title",
 								 sprintf('Enter base points A when the search term occures in the title of a %s.', $object->labels->singular_name), 'number', '30%');
