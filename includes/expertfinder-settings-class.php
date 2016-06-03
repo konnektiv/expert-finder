@@ -280,13 +280,19 @@ class Expert_Finder_Settings {
 
 	public function expertfinder_result_types_callback()
 	{
-		echo "<p>";
-		$this->text_callback('result_types.activity_stream.A', 'Enter base points A when the search term occures in an activty stream update.', 'number', '30%');
-		echo "</p>";
+		$finder = Expert_Finder_Result_Type_Factory::getFinder('activity_stream');
+		if ($finder->isAvailable()) {
+			echo "<p>";
+			$this->text_callback('result_types.activity_stream.A', 'Enter base points A when the search term occures in an activty stream update.', 'number', '30%');
+			echo "</p>";
+		}
 
-		echo "<p>";
-		$this->text_callback('result_types.profile_field.A', 'Enter base points A when the search term occures in a profile field.', 'number', '30%');
-		echo "</p>";
+		$finder = Expert_Finder_Result_Type_Factory::getFinder('profile_field');
+		if ($finder->isAvailable()) {
+			echo "<p>";
+			$this->text_callback('result_types.profile_field.A', 'Enter base points A when the search term occures in a profile field.', 'number', '30%');
+			echo "</p>";
+		}
 
 		foreach($this->default_options['result_types']['post']['post_types'] as $post_type => $options){
 

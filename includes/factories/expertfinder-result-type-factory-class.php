@@ -18,7 +18,7 @@ class Expert_Finder_Result_Type_Factory {
 	private function __construct() { /* Do nothing here */
 	}
 
-    public static function getFinder($result_type, $options) {
+    public static function getFinder($result_type, $options = array()) {
         $finder = "Expert_Finder_{$result_type}_Finder";
 
         if (class_exists($finder)) {
