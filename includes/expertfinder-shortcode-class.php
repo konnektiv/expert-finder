@@ -72,13 +72,13 @@ class Expert_Finder_Shortcode {
         ob_start();
         ?>
 
-        <form class="expert-finder" method="post">
+        <form class="expert-finder search-form" method="post">
 			<div class="rtp-search-form-wrapper">
 				<label class="screen-reader-text hide"><?php _e('Search for Experts:', 'expert-finder') ?></label>
 				<input type="search" required="required" minlength="3" placeholder="<?php _e('Search for Experts ...', 'expert-finder') ?>" value="<?php echo $search ?>"
 					   name="expert_finder_search" class="search-text search-field rtp-search-input"
 					   title="<?php _e('Search for Experts ...', 'expert-finder') ?>">
-				<input type="submit" class="searchsubmit expert-search-submit rtp-search-button button tiny" value="Search" title="Search">
+				<button type="submit" class="searchsubmit search-submit rtp-search-button button tiny" value="Search" title="Search">
 			</div>
         </form>
 
