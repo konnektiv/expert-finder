@@ -78,7 +78,7 @@ class Expert_Finder_Shortcode {
 				<input type="search" required="required" minlength="3" placeholder="<?php _e('Search for Experts ...', 'expert-finder') ?>" value="<?php echo $search ?>"
 					   name="expert_finder_search" class="search-text search-field rtp-search-input"
 					   title="<?php _e('Search for Experts ...', 'expert-finder') ?>">
-				<input type="submit" class="searchsubmit search-submit rtp-search-button button tiny" value="Search" title="Search">
+				<input type="submit" class="searchsubmit expert-search-submit rtp-search-button button tiny" value="Search" title="Search">
 			</div>
         </form>
 
