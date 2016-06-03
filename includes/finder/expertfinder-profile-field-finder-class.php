@@ -8,7 +8,7 @@
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-class Expert_Finder_Profile_Field_Finder extends Expert_Finder_Type_Finder {
+class Expert_Finder_Profile_Field_Finder extends Expert_Finder_Buddypress_Finder {
 
     public function getResults($search) {
 		global $wpdb, $bp;

@@ -81,7 +81,8 @@ class Expert_Finder_Search_Engine {
 
         foreach($result_types as $result_type => $options){
             $finder = Expert_Finder_Result_Type_Factory::getFinder($result_type, $options);
-            $results = array_merge($results, $finder->getResults($search));
+            if ($finder->isAvailable())
+				$results = array_merge($results, $finder->getResults($search));
         }
 
         $this->sort_results($results);

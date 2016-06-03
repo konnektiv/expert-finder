@@ -21,6 +21,10 @@ abstract class Expert_Finder_Type_Finder {
         $this->options = $options;
     }
 
+    public function isAvailable() {
+		return true;
+    }
+
     abstract protected function getResults($search);
 
 }
