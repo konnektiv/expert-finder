@@ -13,6 +13,11 @@ class Expert_Finder_Profile_Field_Finder extends Expert_Finder_Buddypress_Finder
     public function getResults($search) {
 		global $wpdb, $bp;
 
+        $results = array();
+
+        if ( !$this->isEnabled() )
+            return $results;
+
         $results = $wpdb->get_results( $wpdb->prepare("
 			SELECT *
 			FROM {$bp->profile->table_name_data}

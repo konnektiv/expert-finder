@@ -15,6 +15,10 @@ class Expert_Finder_Post_Finder extends Expert_Finder_Type_Finder {
         $results = array();
 
 		foreach($post_types as $post_type => $options){
+
+            if (!isset($options['enabled']) || !$options['enabled'] )
+                continue;
+
             $posts = get_posts(array(
                 'post_type'      => $post_type,
                 'posts_per_page' => -1,
