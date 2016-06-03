@@ -61,7 +61,7 @@ class Expert_Finder_Shortcode {
 
 	function expert_finder_shortcode() {
 		$engine = Expert_Finder_Search_Engine::instance();
-		$search = $_POST['expert_finder_search'];
+		$search = $_SERVER['REQUEST_METHOD'] === 'POST'?$_POST['expert_finder_search']:false;
         $experts = array();
         $num_results = Expert_Finder_Settings::instance()->options['num_results'];
         $num_experts = Expert_Finder_Settings::instance()->options['num_experts'];
