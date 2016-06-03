@@ -103,6 +103,14 @@ class Expert_Finder_Settings {
 			'result_types'	=> array(
                 'post' => array(
                     'post_types' => array(
+						'post' => array(
+                            'A_title'       => 20,
+                            'A_content'     => 10,
+                        ),
+                        'page' => array(
+                            'A_title'       => 20,
+                            'A_content'     => 10,
+                        ),
                         'open_house' => array(
                             'A_title'       => 20,
                             'A_content'     => 10,
