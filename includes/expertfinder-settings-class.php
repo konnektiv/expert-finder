@@ -324,6 +324,7 @@ class Expert_Finder_Settings {
 	{
 		$finder = Expert_Finder_Result_Type_Factory::getFinder('activity_stream');
 		if ($finder->isAvailable()) {
+			echo "<h3>Activity Stream updates</h3>";
 			echo "<p>";
 			$this->text_callback('result_types.activity_stream.A', 'Enter base points A when the search term occures in an activty stream update.', 'number', '30%');
 			echo "</p>";
@@ -331,6 +332,7 @@ class Expert_Finder_Settings {
 
 		$finder = Expert_Finder_Result_Type_Factory::getFinder('profile_field');
 		if ($finder->isAvailable()) {
+			echo "<h3>Profile fields</h3>";
 			echo "<p>";
 			$this->text_callback('result_types.profile_field.A', 'Enter base points A when the search term occures in a profile field.', 'number', '30%');
 			echo "</p>";
@@ -342,6 +344,7 @@ class Expert_Finder_Settings {
 				continue;
 			$object = get_post_type_object($post_type);
 
+			echo "<h3>{$object->labels->name}</h3>";
 			echo "<p>";
 			$this->text_callback("result_types.post.post_types.{$post_type}.A_title",
 								 sprintf('Enter base points A when the search term occures in the title of a %s.', $object->labels->singular_name), 'number', '30%');
