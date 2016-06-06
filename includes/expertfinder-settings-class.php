@@ -45,6 +45,10 @@ class Expert_Finder_Settings {
 	}
 
 
+	public static function likes_available() {
+		return class_exists('BPLIKE_LIKES');
+	}
+
 	/**
 	 * Recursive argument parsing
 	 *
@@ -204,13 +208,15 @@ class Expert_Finder_Settings {
 			'expertfinder-setting-admin' // Page
 		);
 
-		add_settings_field(
-			'expertfinder_gl', // ID
-			'Likes weight', // Title
-			array( $this, 'expertfinder_gl_callback' ), // Callback
-			'expertfinder-setting-admin', // Page
-			'setting_section_search_engine' // Section
-		);
+		if (self::likes_available()) {
+			add_settings_field(
+				'expertfinder_gl', // ID
+				'Likes weight', // Title
+				array( $this, 'expertfinder_gl_callback' ), // Callback
+				'expertfinder-setting-admin', // Page
+				'setting_section_search_engine' // Section
+			);
+		}
 
 		add_settings_field(
 			'expertfinder_gk', // ID

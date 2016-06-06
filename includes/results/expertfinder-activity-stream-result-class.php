@@ -36,7 +36,7 @@ class Expert_Finder_Activity_Stream_Result extends Expert_Finder_Result {
 
     protected function get_likes() {
         $count = 0;
-        if ( class_exists('BPLIKE_LIKES') ) {
+        if ( Expert_Finder_Settings::likes_available() ) {
             $count = BPLIKE_LIKES::get_likers($this->activity->id, 'activity_update');
         }
         return count($count);
