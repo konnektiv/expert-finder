@@ -10,6 +10,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 class Expert_Finder_Activity_Stream_Finder extends Expert_Finder_Buddypress_Finder {
 
+    public function isAvailable() {
+        return parent::isAvailable() && bp_is_active('activity');
+    }
+
     public function getResults($search) {
 
         $results = array();
