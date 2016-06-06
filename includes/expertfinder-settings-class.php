@@ -366,10 +366,12 @@ class Expert_Finder_Settings {
 			echo "</p>";
 		}
 
-		foreach($this->default_options['result_types']['post']['post_types'] as $post_type => $options){
+		$post_types = get_post_types(array(
+			'public'  => true,
+		));
 
-			if (!post_type_exists($post_type))
-				continue;
+		foreach($post_types as $post_type){
+
 			$object = get_post_type_object($post_type);
 
 			echo "<h3>{$object->labels->name}</h3>";
