@@ -94,48 +94,44 @@ class Expert_Finder_Settings {
 	 *
 	 */
 	private function setup_globals() {
+
+		$default_post_type_options = apply_filters('expert_finder_default_post_type_options',
+			array(
+				'post' => array(
+					'A_title'       => 20,
+					'A_content'     => 10,
+				),
+				'page' => array(
+					'A_title'       => 20,
+					'A_content'     => 10,
+				),
+				'topic' => array(
+					'A_title'       => 6,
+					'A_content'     => 3,
+				),
+				'reply' => array(
+					'A_title'       => 0,
+					'A_content'     => 3,
+				),
+			));
+
 		$this->default_options = array(
-			'G_L'			=> 1.1,
-			'G_K'			=> 1.2,
-			'G_H'			=> 1.1,
+			'G_L'           => 1.1,
+			'G_K'           => 1.2,
+			'G_H'           => 1.1,
 			'num_results'   => 3,
 			'num_experts'   => 15,
-			'result_types'	=> array(
-                'post' => array(
-                    'post_types' => array(
-						'post' => array(
-                            'A_title'       => 20,
-                            'A_content'     => 10,
-                        ),
-                        'page' => array(
-                            'A_title'       => 20,
-                            'A_content'     => 10,
-                        ),
-                        'open_house' => array(
-                            'A_title'       => 20,
-                            'A_content'     => 10,
-                        ),
-                        'beta_house' => array(
-                            'A_title'       => 10,
-                            'A_content'     =>  5,
-                        ),
-                        'topic' => array(
-                            'A_title'       => 6,
-                            'A_content'     => 3,
-                        ),
-                        'reply' => array(
-                            'A_title'       => 0,
-                            'A_content'     => 3,
-                        ),
-                    )
-                ),
-                'activity_stream' => array(
-                    'A' => 1
-                ),
-                'profile_field' => array(
-                    'A' => 10
-                )
-            ),
+			'result_types'  => array(
+				'post' => array(
+					'post_types' => $default_post_type_options
+				),
+				'activity_stream' => array(
+					'A' => 1
+				),
+				'profile_field' => array(
+					'A' => 10
+				)
+			),
 		);
 		$options = get_option( 'expertfinder_options' );
 		$this->options = $this->parse_args_r( $options, $this->default_options);
