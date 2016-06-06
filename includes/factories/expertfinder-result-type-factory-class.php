@@ -1,6 +1,6 @@
 <?php
 /**
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Konnektiv
  * Author URI: http://konnektiv.de/
  */
@@ -13,7 +13,7 @@ class Expert_Finder_Result_Type_Factory {
     /**
 	 * A dummy constructor to prevent loading more than one instance
 	 *
-	 * @since Expert_Finder_Result_Type_Factory (0.0.1)
+	 * @since Expert_Finder_Result_Type_Factory (1.0.0)
 	 */
 	private function __construct() { /* Do nothing here */
 	}

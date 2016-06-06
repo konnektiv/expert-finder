@@ -1,6 +1,6 @@
 <?php
 /**
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Konnektiv
  * Author URI: http://konnektiv.de/
  */
@@ -20,7 +20,7 @@ class Expert_Finder_Search_Engine {
 	 * Insures that only one instance of Expert_Finder_Search_Engine exists in memory at
 	 * any one time. Also prevents needing to define globals all over the place.
 	 *
-	 * @since Expert_Finder_Search_Engine (0.0.1)
+	 * @since Expert_Finder_Search_Engine (1.0.0)
 	 *
 	 * @staticvar array $instance
 	 *
@@ -39,7 +39,7 @@ class Expert_Finder_Search_Engine {
 	/**
 	 * A dummy constructor to prevent loading more than one instance
 	 *
-	 * @since Expert_Finder_Search_Engine (0.0.1)
+	 * @since Expert_Finder_Search_Engine (1.0.0)
 	 */
 	private function __construct() { /* Do nothing here */
 	}
@@ -48,7 +48,7 @@ class Expert_Finder_Search_Engine {
 	/**
 	 * Component global variables
 	 *
-	 * @since Expert_Finder_Search_Engine (0.0.1)
+	 * @since Expert_Finder_Search_Engine (1.0.0)
 	 * @access private
 	 *
 	 */
@@ -60,7 +60,7 @@ class Expert_Finder_Search_Engine {
 	/**
 	 * Setup the actions
 	 *
-	 * @since Expert_Finder_Search_Engine (0.0.1)
+	 * @since Expert_Finder_Search_Engine (1.0.0)
 	 * @access private
 	 *
 	 * @uses remove_action() To remove various actions

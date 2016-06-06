@@ -1,6 +1,6 @@
 <?php
 /**
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Konnektiv
  * Author URI: http://konnektiv.de/
  */
@@ -16,7 +16,7 @@ abstract class Expert_Finder_Result {
 	/**
 	 *  Constructor
 	 *
-	 * @since Expert_Finder_Result (0.0.1)
+	 * @since Expert_Finder_Result (1.0.0)
 	 */
 	protected function __construct($a_title, $a_content, $search) {
         $this->a_title   = $a_title;

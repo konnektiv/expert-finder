@@ -1,6 +1,6 @@
 <?php
 /**
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Konnektiv
  * Author URI: http://konnektiv.de/
  */
@@ -20,7 +20,7 @@ class Expert_Finder_Shortcode {
 	 * Insures that only one instance of Expert_Finder_Shortcode exists in memory at
 	 * any one time. Also prevents needing to define globals all over the place.
 	 *
-	 * @since Expert_Finder_Shortcode (0.0.1)
+	 * @since Expert_Finder_Shortcode (1.0.0)
 	 *
 	 * @staticvar array $instance
 	 *
@@ -38,7 +38,7 @@ class Expert_Finder_Shortcode {
 	/**
 	 * A dummy constructor to prevent loading more than one instance
 	 *
-	 * @since Expert_Finder_Shortcode (0.0.1)
+	 * @since Expert_Finder_Shortcode (1.0.0)
 	 */
 	private function __construct() { /* Do nothing here */
 	}
@@ -46,7 +46,7 @@ class Expert_Finder_Shortcode {
 	/**
 	 * Setup the short codes to be used in templates
 	 *
-	 * @since Expert_Finder_Shortcode (0.0.1)
+	 * @since Expert_Finder_Shortcode (1.0.0)
 	 * @access private
 	 *
 	 * @uses add_shortcode() to add various shortcodes

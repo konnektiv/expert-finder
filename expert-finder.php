@@ -6,7 +6,8 @@
  * Version: 1.0.0
  * Author: Konnektiv
  * Author URI: http://konnektiv.de/
- * License: GPLv2 (license.txt)
+ * License: GNU AGPL (license.txt)
+ * Text Domain: expert-finder
  */
 
 // Exit if accessed directly

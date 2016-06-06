@@ -1,6 +1,6 @@
 <?php
 /**
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Konnektiv
  * Author URI: http://konnektiv.de/
  */
@@ -15,7 +15,7 @@ class Expert_Finder_Profile_Field_Result extends Expert_Finder_Result {
 	/**
 	 *  Constructor
 	 *
-	 * @since Expert_Finder_Profile_Field_Result (0.0.1)
+	 * @since Expert_Finder_Profile_Field_Result (1.0.0)
 	 */
 	public function __construct($field, $a, $search) {
         $this->field = new BP_XProfile_Field($field->field_id, $field->user_id);
