@@ -275,7 +275,24 @@ class Expert_Finder_Settings {
 	 */
 	public function print_search_engine_info()
 	{
-		print 'Configure the different variables of the Expert Search engine here.';
+		?>
+		<p>Expert Finder displays authors of results of different types which match a search term ordered by their score <strong><i>P<sub>w</sub></i></strong>. <p>The score <strong><i>P<sub>w</sub></i></strong> for each expert is computed by the sum of the scores <strong><i>B<sub>w</sub></i></strong> for each result where the score <strong><i>B<sub>w</sub></i></strong> is computed by the following formula:</p>
+		<h3><i>
+			B<sub>w</sub> = A * G<sub>L</sub><sup>L</sup> * G<sub>K</sub><sup>K</sup> * G<sub>H</sub><sup>H</sup>
+		</i></h3>
+		<p>where<p>
+		<p><strong><i>L</i></strong> is the number of Likes (Only available if you install the BuddyPress Like Plugin).</p>
+		<p><strong><i>K</i></strong> is the number of comments.</p>
+		<p><strong><i>H</i></strong> is the number times the keyword occures in the result.</p>
+		<p><strong><i>A</i></strong> are the base points for each result type which can be configured below.</p>
+		<p>For post types <strong><i>A</i></strong> is<p>
+		<h3><i>A</i> = <i>A<sub>c</sub> + A<sub>t</sub></i></h3>
+		<p>where</p>
+		<p><strong><i>A<sub>c</sub></i></strong> are the base points if the search term occures in title of the post and</p>
+		<p><strong><i>A<sub>t</sub></i></strong> are the base points if the search term occures in content of the post</p>
+		<p><strong><i>G<sub>L</sub>, G<sub>K</sub></i></strong> and <i><strong>G<sub>H</sub></i></strong> are global weights which can be configured below.<p>
+
+		<?php
 	}
 
 	private function parse_option($option) {
@@ -325,17 +342,17 @@ class Expert_Finder_Settings {
 
 	public function expertfinder_gl_callback()
 	{
-		$this->text_callback('G_L', 'Enter the global weight G_L for the number of likes.', 'number', '30%', 'step="0.01"');
+		$this->text_callback('G_L', 'Enter the global weight <strong><i>G<sub>L</sub></i></strong> for the number of likes.', 'number', '30%', 'step="0.01"');
 	}
 
 	public function expertfinder_gk_callback()
 	{
-		$this->text_callback('G_K', 'Enter the global weight G_K for the number of comments.', 'number', '30%', 'step="0.01"');
+		$this->text_callback('G_K', 'Enter the global weight <strong><i>G<sub>K</sub></i></strong> for the number of comments.', 'number', '30%', 'step="0.01"');
 	}
 
 	public function expertfinder_gh_callback()
 	{
-		$this->text_callback('G_H', 'Enter the global weight G_H for number of occurences of the search term.', 'number', '30%', 'step="0.01"');
+		$this->text_callback('G_H', 'Enter the global weight <strong><i>G<sub>H</sub></i></strong> for number of occurences of the search term.', 'number', '30%', 'step="0.01"');
 	}
 
 	public function expertfinder_num_results_callback()
@@ -355,7 +372,7 @@ class Expert_Finder_Settings {
 			echo "<h3>Activity Stream updates</h3>";
 			$this->checkbox_callback("result_types.activity_stream.enabled", 'Check to enable searching for activity stream updates.' );
 			echo "<p>";
-			$this->text_callback('result_types.activity_stream.A', 'Enter base points A when the search term occures in an activty stream update.', 'number', '30%');
+			$this->text_callback('result_types.activity_stream.A', 'Enter base points <strong><i>A</i></strong> when the search term occures in an activty stream update.', 'number', '30%');
 			echo "</p>";
 		}
 
@@ -364,7 +381,7 @@ class Expert_Finder_Settings {
 			echo "<h3>Profile fields</h3>";
 			$this->checkbox_callback("result_types.profile_field.enabled", 'Check to enable searching for profile fields.' );
 			echo "<p>";
-			$this->text_callback('result_types.profile_field.A', 'Enter base points A when the search term occures in a profile field.', 'number', '30%');
+			$this->text_callback('result_types.profile_field.A', 'Enter base points <strong><i>A</i></strong> when the search term occures in a profile field.', 'number', '30%');
 			echo "</p>";
 		}
 
@@ -380,10 +397,10 @@ class Expert_Finder_Settings {
 			$this->checkbox_callback("result_types.post.post_types.{$post_type}.enabled", sprintf('Check to enable searching for %s', $object->labels->name) );
 			echo "<p>";
 			$this->text_callback("result_types.post.post_types.{$post_type}.A_title",
-								 sprintf('Enter base points A when the search term occures in the title of a %s.', $object->labels->singular_name), 'number', '30%');
+								 sprintf('Enter base points <strong><i>A<sub>t</sub></i></strong> when the search term occures in the title of a %s.', $object->labels->singular_name), 'number', '30%');
 			echo "<br>";
 			$this->text_callback("result_types.post.post_types.{$post_type}.A_content",
-								 sprintf('Enter base points A when the search term occures in the content of a %s.', $object->labels->singular_name), 'number', '30%');
+								 sprintf('Enter base points <strong><i>A<sub>c</sub></i></strong> when the search term occures in the content of a %s.', $object->labels->singular_name), 'number', '30%');
 			echo "</p>";
 		}
 	}
