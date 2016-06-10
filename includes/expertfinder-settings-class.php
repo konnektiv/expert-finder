@@ -6,7 +6,9 @@
  */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Expert_Finder_Settings {
 	/**
@@ -26,7 +28,7 @@ class Expert_Finder_Settings {
 	 *
 	 * @return Expert_Finder_Settings
 	 */
-	public static function instance( ) {
+	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new Expert_Finder_Settings;
 			self::$instance->setup_globals();
@@ -46,7 +48,7 @@ class Expert_Finder_Settings {
 
 
 	public static function likes_available() {
-		return class_exists('BPLIKE_LIKES');
+		return class_exists( 'BPLIKE_LIKES' );
 	}
 
 	/**
@@ -76,7 +78,7 @@ class Expert_Finder_Settings {
 	 * @arg array $b
 	 * @return array
 	 */
-	 private function parse_args_r( &$a, $b ) {
+	private function parse_args_r( &$a, $b ) {
 		$a = (array) $a;
 		$b = (array) $b;
 		$r = $b;
@@ -87,6 +89,7 @@ class Expert_Finder_Settings {
 				$r[ $k ] = $v;
 			}
 		}
+
 		return $r;
 	}
 
@@ -99,46 +102,46 @@ class Expert_Finder_Settings {
 	 */
 	private function setup_globals() {
 
-		$default_post_type_options = apply_filters('expert_finder_default_post_type_options',
+		$default_post_type_options = apply_filters( 'expert_finder_default_post_type_options',
 			array(
-				'post' => array(
-					'A_title'       => 20,
-					'A_content'     => 10,
+				'post'  => array(
+					'A_title'   => 20,
+					'A_content' => 10,
 				),
-				'page' => array(
-					'A_title'       => 20,
-					'A_content'     => 10,
+				'page'  => array(
+					'A_title'   => 20,
+					'A_content' => 10,
 				),
 				'topic' => array(
-					'A_title'       => 6,
-					'A_content'     => 3,
+					'A_title'   => 6,
+					'A_content' => 3,
 				),
 				'reply' => array(
-					'A_title'       => 0,
-					'A_content'     => 3,
+					'A_title'   => 0,
+					'A_content' => 3,
 				),
-			));
+			) );
 
 		$this->default_options = array(
-			'G_L'           => 1.1,
-			'G_K'           => 1.2,
-			'G_H'           => 1.1,
-			'num_results'   => 3,
-			'num_experts'   => 15,
-			'result_types'  => array(
-				'post' => array(
+			'G_L'          => 1.1,
+			'G_K'          => 1.2,
+			'G_H'          => 1.1,
+			'num_results'  => 3,
+			'num_experts'  => 15,
+			'result_types' => array(
+				'post'            => array(
 					'post_types' => $default_post_type_options
 				),
 				'activity_stream' => array(
 					'A' => 1
 				),
-				'profile_field' => array(
+				'profile_field'   => array(
 					'A' => 10
 				)
 			),
 		);
-		$options = get_option( 'expertfinder_options' );
-		$this->options = $this->parse_args_r( $options, $this->default_options);
+		$options               = get_option( 'expertfinder_options' );
+		$this->options         = $this->parse_args_r( $options, $this->default_options );
 	}
 
 	/**
@@ -159,7 +162,7 @@ class Expert_Finder_Settings {
 	 * Add options page
 	 */
 	function add_plugin_page() {
-		 // This page will be under "Settings"
+		// This page will be under "Settings"
 		add_options_page(
 			'Settings Admin',
 			'Expert Finder',
@@ -172,18 +175,17 @@ class Expert_Finder_Settings {
 	/**
 	 * Options page callback
 	 */
-	public function create_admin_page()
-	{
+	public function create_admin_page() {
 		?>
 		<div class="wrap">
 			<h2>Expert Finder Settings</h2>
 			<form method="post" action="options.php">
-			<?php
+				<?php
 				// This prints out all hidden setting fields
 				settings_fields( 'expertfinder_option_group' );
 				do_settings_sections( 'expertfinder-setting-admin' );
 				submit_button();
-			?>
+				?>
 			</form>
 		</div>
 		<?php
@@ -208,7 +210,7 @@ class Expert_Finder_Settings {
 			'expertfinder-setting-admin' // Page
 		);
 
-		if (self::likes_available()) {
+		if ( self::likes_available() ) {
 			add_settings_field(
 				'expertfinder_gl', // ID
 				'Likes weight', // Title
@@ -263,46 +265,52 @@ class Expert_Finder_Settings {
 	 * Sanitize each setting field as needed
 	 *
 	 * @param array $input Contains all settings fields as array keys
+	 *
 	 * @return array
 	 */
-	public function sanitize( $input )
-	{
+	public function sanitize( $input ) {
 		return $input;
 	}
 
-	 /**
+	/**
 	 * Print the Section text
 	 */
-	public function print_search_engine_info()
-	{
+	public function print_search_engine_info() {
 		?>
-		<p>Expert Finder displays authors of results of different types which match a search term ordered by their score <strong><i>P<sub>w</sub></i></strong>. <p>The score <strong><i>P<sub>w</sub></i></strong> for each expert is computed by the sum of the scores <strong><i>B<sub>w</sub></i></strong> for each result where the score <strong><i>B<sub>w</sub></i></strong> is computed by the following formula:</p>
+		<p>Expert Finder displays authors of results of different types which match a search term ordered by their score
+			<strong><i>P<sub>w</sub></i></strong>. <p>The score <strong><i>P<sub>w</sub></i></strong> for each expert is
+			computed by the sum of the scores <strong><i>B<sub>w</sub></i></strong> for each result where the score
+			<strong><i>B<sub>w</sub></i></strong> is computed by the following formula:</p>
 		<h3><i>
-			B<sub>w</sub> = A * G<sub>L</sub><sup>L</sup> * G<sub>K</sub><sup>K</sup> * G<sub>H</sub><sup>H</sup>
-		</i></h3>
+				B<sub>w</sub> = A * G<sub>L</sub><sup>L</sup> * G<sub>K</sub><sup>K</sup> * G<sub>H</sub><sup>H</sup>
+			</i></h3>
 		<p>where<p>
-		<p><strong><i>L</i></strong> is the number of Likes (Only available if you install the BuddyPress Like Plugin).</p>
+		<p><strong><i>L</i></strong> is the number of Likes (Only available if you install the BuddyPress Like Plugin).
+		</p>
 		<p><strong><i>K</i></strong> is the number of comments.</p>
 		<p><strong><i>H</i></strong> is the number times the keyword occures in the result.</p>
 		<p><strong><i>A</i></strong> are the base points for each result type which can be configured below.</p>
 		<p>For post types <strong><i>A</i></strong> is<p>
 		<h3><i>A</i> = <i>A<sub>c</sub> + A<sub>t</sub></i></h3>
 		<p>where</p>
-		<p><strong><i>A<sub>c</sub></i></strong> are the base points if the search term occures in title of the post and</p>
-		<p><strong><i>A<sub>t</sub></i></strong> are the base points if the search term occures in content of the post</p>
-		<p><strong><i>G<sub>L</sub>, G<sub>K</sub></i></strong> and <i><strong>G<sub>H</sub></i></strong> are global weights which can be configured below.<p>
+		<p><strong><i>A<sub>c</sub></i></strong> are the base points if the search term occures in title of the post and
+		</p>
+		<p><strong><i>A<sub>t</sub></i></strong> are the base points if the search term occures in content of the post
+		</p>
+		<p><strong><i>G<sub>L</sub>, G<sub>K</sub></i></strong> and <i><strong>G<sub>H</sub></i></strong> are global
+			weights which can be configured below.</p>
 
 		<?php
 	}
 
-	private function parse_option($option) {
-		$tokens = explode('.', $option);
-		$id = implode('-', $tokens);
-		$name = implode('][', $tokens);
-		$value = $this->options;
-		foreach($tokens as $key){
-			if (isset($value[$key])) {
-				$value = $value[$key];
+	private function parse_option( $option ) {
+		$tokens = explode( '.', $option );
+		$id     = implode( '-', $tokens );
+		$name   = implode( '][', $tokens );
+		$value  = $this->options;
+		foreach ( $tokens as $key ) {
+			if ( isset( $value[ $key ] ) ) {
+				$value = $value[ $key ];
 			} else {
 				$value = false;
 				break;
@@ -313,94 +321,87 @@ class Expert_Finder_Settings {
 			'id'    => $id,
 			'name'  => $name,
 			'value' => $value,
-			);
+		);
 	}
 
-	public function checkbox_callback($option, $text)
-	{
-		$option = $this->parse_option($option);
+	public function checkbox_callback( $option, $text ) {
+		$option = $this->parse_option( $option );
 
 		?>
-		<input id="expertfinder-options-<?php echo $option['id'] ?>" name="expertfinder_options[<?php echo $option['name'] ?>]"
-			   type="checkbox" value="1" <?php checked($option['value']) ?>>
+		<input id="expertfinder-options-<?php echo $option['id'] ?>"
+		       name="expertfinder_options[<?php echo $option['name'] ?>]"
+		       type="checkbox" value="1" <?php checked( $option['value'] ) ?>>
 		<label for="expertfinder-options-<?php echo $option['id'] ?>"><?php echo $text ?></label>
 		<?php
 	}
 
-	public function text_callback($option, $text, $type="text", $width = "70%", $attrs = '')
-	{
+	public function text_callback( $option, $text, $type = "text", $width = "70%", $attrs = '' ) {
 
-		$option = $this->parse_option($option);
+		$option = $this->parse_option( $option );
 
 		?>
 		<label for="expertfinder-options-<?php echo $option['id'] ?>"><?php echo $text ?></label><br>
 		<input style="width:<?php echo $width ?>;" id="expertfinder-options-<?php echo $option['id'] ?>"
-			   name="expertfinder_options[<?php echo $option['name'] ?>]"
-			   type="<?php echo $type ?>" value="<?php echo $option['value'] ?>" <?php echo $attrs ?>>
+		       name="expertfinder_options[<?php echo $option['name'] ?>]"
+		       type="<?php echo $type ?>" value="<?php echo $option['value'] ?>" <?php echo $attrs ?>>
 		<?php
 	}
 
-	public function expertfinder_gl_callback()
-	{
-		$this->text_callback('G_L', 'Enter the global weight <strong><i>G<sub>L</sub></i></strong> for the number of likes.', 'number', '30%', 'step="0.01"');
+	public function expertfinder_gl_callback() {
+		$this->text_callback( 'G_L', 'Enter the global weight <strong><i>G<sub>L</sub></i></strong> for the number of likes.', 'number', '30%', 'step="0.01"' );
 	}
 
-	public function expertfinder_gk_callback()
-	{
-		$this->text_callback('G_K', 'Enter the global weight <strong><i>G<sub>K</sub></i></strong> for the number of comments.', 'number', '30%', 'step="0.01"');
+	public function expertfinder_gk_callback() {
+		$this->text_callback( 'G_K', 'Enter the global weight <strong><i>G<sub>K</sub></i></strong> for the number of comments.', 'number', '30%', 'step="0.01"' );
 	}
 
-	public function expertfinder_gh_callback()
-	{
-		$this->text_callback('G_H', 'Enter the global weight <strong><i>G<sub>H</sub></i></strong> for number of occurences of the search term.', 'number', '30%', 'step="0.01"');
+	public function expertfinder_gh_callback() {
+		$this->text_callback( 'G_H', 'Enter the global weight <strong><i>G<sub>H</sub></i></strong> for number of occurences of the search term.', 'number', '30%', 'step="0.01"' );
 	}
 
-	public function expertfinder_num_results_callback()
-	{
-		$this->text_callback('num_results', 'Enter the number of results to show for each expert.', 'number', '30%');
+	public function expertfinder_num_results_callback() {
+		$this->text_callback( 'num_results', 'Enter the number of results to show for each expert.', 'number', '30%' );
 	}
 
-	public function expertfinder_num_experts_callback()
-	{
-		$this->text_callback('num_experts', 'Enter the maximum number of experts to show.', 'number', '30%');
+	public function expertfinder_num_experts_callback() {
+		$this->text_callback( 'num_experts', 'Enter the maximum number of experts to show.', 'number', '30%' );
 	}
 
-	public function expertfinder_result_types_callback()
-	{
-		$finder = Expert_Finder_Result_Type_Factory::getFinder('activity_stream');
-		if ($finder->isAvailable()) {
+	public function expertfinder_result_types_callback() {
+		$finder = Expert_Finder_Result_Type_Factory::getFinder( 'activity_stream' );
+		if ( $finder->isAvailable() ) {
 			echo "<h3>Activity Stream updates</h3>";
-			$this->checkbox_callback("result_types.activity_stream.enabled", 'Check to enable searching for activity stream updates.' );
+			$this->checkbox_callback( "result_types.activity_stream.enabled", 'Check to enable searching for activity stream updates.' );
 			echo "<p>";
-			$this->text_callback('result_types.activity_stream.A', 'Enter base points <strong><i>A</i></strong> when the search term occures in an activty stream update.', 'number', '30%');
+			$this->text_callback( 'result_types.activity_stream.A', 'Enter base points <strong><i>A</i></strong> when the search term occures in an activty stream update.', 'number', '30%' );
 			echo "</p>";
 		}
 
-		$finder = Expert_Finder_Result_Type_Factory::getFinder('profile_field');
-		if ($finder->isAvailable()) {
+		$finder = Expert_Finder_Result_Type_Factory::getFinder( 'profile_field' );
+		if ( $finder->isAvailable() ) {
 			echo "<h3>Profile fields</h3>";
-			$this->checkbox_callback("result_types.profile_field.enabled", 'Check to enable searching for profile fields.' );
+			$this->checkbox_callback( "result_types.profile_field.enabled", 'Check to enable searching for profile fields.' );
 			echo "<p>";
-			$this->text_callback('result_types.profile_field.A', 'Enter base points <strong><i>A</i></strong> when the search term occures in a profile field.', 'number', '30%');
+			$this->text_callback( 'result_types.profile_field.A', 'Enter base points <strong><i>A</i></strong> when the search term occures in a profile field.', 'number', '30%' );
 			echo "</p>";
 		}
 
-		$post_types = get_post_types(array(
-			'public'  => true,
-		));
+		$post_types = get_post_types( array(
+			'public' => true,
+		) );
 
-		foreach($post_types as $post_type){
+		foreach ( $post_types as $post_type ) {
 
-			$object = get_post_type_object($post_type);
+			$object = get_post_type_object( $post_type );
 
 			echo "<h3>{$object->labels->name}</h3>";
-			$this->checkbox_callback("result_types.post.post_types.{$post_type}.enabled", sprintf('Check to enable searching for %s', $object->labels->name) );
+			$this->checkbox_callback( "result_types.post.post_types.{$post_type}.enabled", sprintf( 'Check to enable searching for %s', $object->labels->name ) );
 			echo "<p>";
-			$this->text_callback("result_types.post.post_types.{$post_type}.A_title",
-								 sprintf('Enter base points <strong><i>A<sub>t</sub></i></strong> when the search term occures in the title of a %s.', $object->labels->singular_name), 'number', '30%');
+			$this->text_callback( "result_types.post.post_types.{$post_type}.A_title",
+				sprintf( 'Enter base points <strong><i>A<sub>t</sub></i></strong> when the search term occures in the title of a %s.', $object->labels->singular_name ), 'number', '30%' );
 			echo "<br>";
-			$this->text_callback("result_types.post.post_types.{$post_type}.A_content",
-								 sprintf('Enter base points <strong><i>A<sub>c</sub></i></strong> when the search term occures in the content of a %s.', $object->labels->singular_name), 'number', '30%');
+			$this->text_callback( "result_types.post.post_types.{$post_type}.A_content",
+				sprintf( 'Enter base points <strong><i>A<sub>c</sub></i></strong> when the search term occures in the content of a %s.', $object->labels->singular_name ), 'number', '30%' );
 			echo "</p>";
 		}
 	}

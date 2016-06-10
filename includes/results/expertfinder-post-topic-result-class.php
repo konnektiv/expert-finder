@@ -6,15 +6,17 @@
  */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Expert_Finder_Post_topic_Result extends Expert_Finder_Post_Result {
 
-    protected function get_comments() {
-        return bbp_get_topic_reply_count( $this->post->ID, true );
-    }
+	protected function get_comments() {
+		return bbp_get_topic_reply_count( $this->post->ID, true );
+	}
 
-    public function get_type() {
-        return "Forum Topic";
-    }
+	public function get_type() {
+		return "Forum Topic";
+	}
 }

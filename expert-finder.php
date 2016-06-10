@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Expert_Finder {
 
@@ -32,7 +34,7 @@ class Expert_Finder {
 	 *
 	 * @return Expert_Finder
 	 */
-	public static function instance( ) {
+	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new Expert_Finder;
 			self::$instance->includes();
@@ -49,7 +51,6 @@ class Expert_Finder {
 	 */
 	private function __construct() { /* Do nothing here */
 	}
-
 
 
 	/**
@@ -71,11 +72,11 @@ class Expert_Finder {
 	 * @access private
 	 */
 	private function includes() {
-    	require_once('includes/expertfinder-autoloader-class.php');
-		Expert_Finder_AutoLoader::add_path('./');
-		Expert_Finder_AutoLoader::add_path('factories/');
-		Expert_Finder_AutoLoader::add_path('finder/');
-		Expert_Finder_AutoLoader::add_path('results/');
+		require_once( 'includes/expertfinder-autoloader-class.php' );
+		Expert_Finder_AutoLoader::add_path( './' );
+		Expert_Finder_AutoLoader::add_path( 'factories/' );
+		Expert_Finder_AutoLoader::add_path( 'finder/' );
+		Expert_Finder_AutoLoader::add_path( 'results/' );
 	}
 
 }

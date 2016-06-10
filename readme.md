@@ -15,7 +15,7 @@ A search engine to find experts who created or commented various WordPress conte
 ## Description 
 
 This Plugin provides a search engine to find experts who created or commented various WordPress content types.
-Experts are found using a sophisticated algorithm which parameters can be configured on the plugin settings page.
+Experts are found using a sophisticated algorithm evaluating the social interaction. Its parameters can be configured on the plugin settings page.
 The search engine can be included anywhere on the site using the [expert_finder] shortcode.
 
 This plugin was originally developed for the [globe - Community of Digital Learning](https://quality4digitallearning.org/) on behalf of [GIZ](https://www.giz.de/).

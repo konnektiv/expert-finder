@@ -6,7 +6,9 @@
  */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Expert_Finder_Search_Engine {
 	/**
@@ -26,7 +28,7 @@ class Expert_Finder_Search_Engine {
 	 *
 	 * @return Expert_Finder_Search_Engine
 	 */
-	public static function instance( ) {
+	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new Expert_Finder_Search_Engine;
 			self::$instance->setup_globals();
@@ -75,55 +77,57 @@ class Expert_Finder_Search_Engine {
 	 *
 	 * @param string $search The search phrase
 	 */
-	public function get_experts($search) {
-        $result_types = $this->options['result_types'];
-        $results = array();
+	public function get_experts( $search ) {
+		$result_types = $this->options['result_types'];
+		$results      = array();
 
-        foreach($result_types as $result_type => $options){
-            $finder = Expert_Finder_Result_Type_Factory::getFinder($result_type, $options);
-            if ($finder->isAvailable())
-				$results = array_merge($results, $finder->getResults($search));
-        }
+		foreach ( $result_types as $result_type => $options ) {
+			$finder = Expert_Finder_Result_Type_Factory::getFinder( $result_type, $options );
+			if ( $finder->isAvailable() ) {
+				$results = array_merge( $results, $finder->getResults( $search ) );
+			}
+		}
 
-        $this->sort_results($results);
-        $authors = $this->get_authors($results);
-        $this->sort_authors($authors);
+		$this->sort_results( $results );
+		$authors = $this->get_authors( $results );
+		$this->sort_authors( $authors );
 
-        return $authors;
+		return $authors;
 	}
 
-    private function sort_results(array &$results) {
-        usort($results, function($a, $b){
-           return ($a->getBw() > $b->getBw())?-1:1;
-        });
-    }
+	private function sort_results( array &$results ) {
+		usort( $results, function ( $a, $b ) {
+			return ( $a->getBw() > $b->getBw() ) ? - 1 : 1;
+		} );
+	}
 
-    private function sort_authors(array &$authors) {
-        uasort($authors, function($a, $b){
-           return ($a['ranking'] > $b['ranking'])?-1:1;
-        });
-    }
+	private function sort_authors( array &$authors ) {
+		uasort( $authors, function ( $a, $b ) {
+			return ( $a['ranking'] > $b['ranking'] ) ? - 1 : 1;
+		} );
+	}
 
-    private function get_authors(array $results) {
-        $authors = array();
+	private function get_authors( array $results ) {
+		$authors = array();
 
-        foreach($results as $result){
-            $b_w = $result->getBw();
+		foreach ( $results as $result ) {
+			$b_w = $result->getBw();
 
-            foreach($result->get_authors() as $author){
-                if (!isset($authors[$author])) {
-                    $authors[$author] = array(
-                        'ranking' => 0,
-                        'results' => array()
-                    );
-                }
+			foreach ( $result->get_authors() as $author ) {
+				if ( ! isset( $authors[ $author ] ) ) {
+					$authors[ $author ] = array(
+						'ranking' => 0,
+						'results' => array()
+					);
+				}
 
-                $authors[$author]['ranking'] += $b_w;
-                $authors[$author]['results'][] = $result;
-            }
-        }
+				$authors[ $author ]['ranking'] += $b_w;
+				$authors[ $author ]['results'][] = $result;
+			}
+		}
 
-        return $authors;
-    }
+		return $authors;
+	}
 }
+
 Expert_Finder_Search_Engine::instance();

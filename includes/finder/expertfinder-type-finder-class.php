@@ -6,25 +6,27 @@
  */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 abstract class Expert_Finder_Type_Finder {
 
-    protected $options;
+	protected $options;
 
 	/**
 	 *  Constructor
 	 *
 	 * @since Expert_Finder_Post_Result (1.0.0)
 	 */
-	public function __construct($options) {
-        $this->options = $options;
-    }
+	public function __construct( $options ) {
+		$this->options = $options;
+	}
 
-    public function isAvailable() {
+	public function isAvailable() {
 		return true;
-    }
+	}
 
-    abstract protected function getResults($search);
+	abstract protected function getResults( $search );
 
 }
